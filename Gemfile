@@ -70,3 +70,12 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+#Geolocation API
+gem 'geocoder'
+
+#HTTPリクエストライブラリ
+gem 'httparty'
+
+#XML-JSON変換ライブラリ
+gem 'nokogiri'
