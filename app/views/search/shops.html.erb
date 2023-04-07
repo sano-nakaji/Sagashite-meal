@@ -1,42 +1,28 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- 現在地を取得するJavaScript -->
 <script>
-if(navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    var latitude = position.coords.latitude;
-    console.log('緯度：');
-    console.log(latitude);
-    var longitude = position.coords.longitude;
-    console.log('経度：');
-    console.log(longitude);
-    $.ajax({
-      url: "shops",
-      type: "GET",
-      data: {
-        latitude: latitude,
-        longitude: longitude,
-      },
-      dataType: "json",
-      success: function(response) {
-        console.log(response); // サーバーから返された店舗情報を確認
-        console.log('success')
-        // サーバーから返された店舗情報をHTMLに反映
-        var shopsHtml = "";
-        console.log(response)
-         response.forEach(function(shop) {
-           shopsHtml += "<div><h2>" + shop.name + "</h2>";
-           shopsHtml += "<p>" + shop.address + "</p>";
-           // shopsHtml += "<p>" + shop.tel + "</p></div>";
-         });
-         $("#shops-list").html(shopsHtml);
-      },
-      error: function(error) {
-        console.log(error); // エラーが発生した場合はコンソールにログを出力
-      }
-    });
-  });
-}
+navigator.geolocation.getCurrentPosition(function(position) {
+  // 緯度・経度を取得
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  console.log(latitude, longitude);
+
+  // フォームに緯度・経度を設定してsubmit
+  var form = document.getElementById('location-form');
+  form.querySelector('#latitude').value = latitude;
+  form.querySelector('#longitude').value = longitude;
+});
 </script>
+
+<button type="submit" id="search-button">検索</button>
+<script>
+  // submitボタンがクリックされたときにフォームをsubmitする
+  document.getElementById('search-button').addEventListener('click', function() {
+    document.getElementById('location-form').submit();
+  });
+</script>
+
 
 <h1>お店の検索結果</h1>
 
@@ -48,7 +34,7 @@ if(navigator.geolocation) {
     <div>
       <h4><%= shop['name'] %></h4>
       <p><%= shop['address'] %></p>
-      <p><%= shop['tel'] %></p>
+      <p><%= shop['name_kana'] %></p>
     </div>
   <% end %>
 </div>
