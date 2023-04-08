@@ -1,5 +1,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<form id="location-form" action="/shops" method="GET">
+  <input type="hidden" name="latitude" id="latitude" value="">
+  <input type="hidden" name="longitude" id="longitude" value="">
+  <button type="submit">検索</button>
+</form>
+
 <!-- 現在地を取得するJavaScript -->
 <script>
 navigator.geolocation.getCurrentPosition(function(position) {
@@ -15,7 +21,6 @@ navigator.geolocation.getCurrentPosition(function(position) {
 });
 </script>
 
-<button type="submit" id="search-button">検索</button>
 <script>
   // submitボタンがクリックされたときにフォームをsubmitする
   document.getElementById('search-button').addEventListener('click', function() {
@@ -24,7 +29,8 @@ navigator.geolocation.getCurrentPosition(function(position) {
 </script>
 
 
-<h1>お店の検索結果</h1>
+
+<h1>さがしてmeal</h1>
 
 <p>現在の緯度: <%= @latitude %></p>
 <p>現在の経度: <%= @longitude %></p>

@@ -19,9 +19,7 @@ class HotpepperClient
       range: options[:range],
     }
     # HTTPartyを使用してAPIにリクエストを送信、レスポンスを取得
-    # puts query #debug
     response = self.class.get('/gourmet/v1/', query: query)
-    puts response.body #debug
 
     if response.success?
       # レスポンスが成功した場合、XML形式のレスポンスをパースしてJSON形式に変換
