@@ -12,4 +12,40 @@
  *
  *= require_tree .
  *= require_self
- */
+*/
+ 
+ #shop-container {
+  margin-bottom: 20px;
+}
+
+#shop-container > div {
+  display: flex;
+  align-items: center;
+}
+
+.shop-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.shop-image img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.shop-image p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.shop-info {
+  flex: 1;
+}
+
+.shop-name {
+  margin-bottom: 10px;
+}

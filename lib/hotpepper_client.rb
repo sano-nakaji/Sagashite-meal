@@ -31,12 +31,12 @@ class HotpepperClient
     end
   end
 
-  def search_shops(latitude, longitude)
+  def search_shops(latitude, longitude, range)
     # 必要なパラメーターを設定
     options = {
       lat: latitude,
       lng: longitude,
-      range: '5',
+      range: range,
     }
     # searchメソッドを使用、APIから店舗情報を取得する
     result = search(options)

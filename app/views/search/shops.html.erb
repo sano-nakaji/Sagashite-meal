@@ -1,9 +1,22 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<form name="form1">
+<label for="ranges" class="ranges-label">検索範囲</label>
+<select id="ranges" class="ranges-label">
+    <option value="0">---</option>
+    <option value="1">300m</option>
+    <option value="2">500m</option>
+    <option value="3">1000m </option>
+    <option value="4">2000m </option>
+    <option value="5">3000m </option>
+</select>
+</form>
+
 <form id="location-form" action="/shops" method="GET">
   <input type="hidden" name="latitude" id="latitude" value="">
   <input type="hidden" name="longitude" id="longitude" value="">
-  <button type="submit">検索</button>
+  <input type="hidden" name="range" id="range" value="">
+  <button id="search-button" type="button">検索</button>
 </form>
 
 <!-- 現在地を取得するJavaScript -->
@@ -19,29 +32,35 @@ navigator.geolocation.getCurrentPosition(function(position) {
   form.querySelector('#latitude').value = latitude;
   form.querySelector('#longitude').value = longitude;
 });
+
+// submitボタンがクリックされたときにフォームをsubmitする
+document.getElementById('search-button').addEventListener('click', function() {
+  var form = document.getElementById('location-form');
+  var range = document.getElementById('ranges').value;
+  form.querySelector('#range').value = range; // rangeの値をフォームに設定する
+  form.submit();
+});
 </script>
 
-<script>
-  // submitボタンがクリックされたときにフォームをsubmitする
-  document.getElementById('search-button').addEventListener('click', function() {
-    document.getElementById('location-form').submit();
-  });
-</script>
 
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+<% if @latitude != 0 %>
+  <font size="1">現在地 : <%= @latitude %> . <%= @longitude %></font>
+  <h3>検索結果</h3>
+<% end %>
 
-<h1>さがしてmeal</h1>
-
-<p>現在の緯度: <%= @latitude %></p>
-<p>現在の経度: <%= @longitude %></p>
-
-<div id="shops-list">
+<div id="shop-container">
   <% @shops.each do |shop| %>
-    <div>
-      <h4><%= shop['name'] %></h4>
-      <p><%= shop['address'] %></p>
-      <p><%= shop['name_kana'] %></p>
-      <p><%= shop['logo_image'] %></p>
+    <div class="shop-container">
+      <div class="shop-image">
+        <img src="<%= shop['logo_image'] %>" alt="<%= shop['name'] %>のロゴ">
+        <font size="1">【画像提供：ホットペッパー グルメ】</font>
+      </div>
+      <div class="shop-info">
+        <h2 class="shop-name"><%= shop['name'] %></h2>
+        <p><%= shop['address'] %></p>
+      </div>
     </div>
   <% end %>
 </div>
