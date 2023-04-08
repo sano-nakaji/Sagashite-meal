@@ -46,4 +46,23 @@ class HotpepperClient
       return result
     end
   end
+
+  def get_shop(shop_id)
+    query = { id: shop_id }
+    response = self.class.get('/gourmet/v1/', query: query)
+  
+    if response.success?
+      json = Hash.from_xml(response.body).to_json
+      result = JSON.parse(json)['results']['shop']
+      if result.nil?
+        return []
+      else
+        return result
+      end
+    else
+      raise response.response
+    end
+  end
+  
+
 end
