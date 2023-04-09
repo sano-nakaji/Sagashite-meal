@@ -1,24 +1,35 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<form name="form1">
-<label for="ranges" class="ranges-label">検索範囲</label>
-<select id="ranges" class="ranges-label">
-    <option value="0">---</option>
-    <option value="1">300m</option>
-    <option value="2">500m</option>
-    <option value="3">1km </option>
-    <option value="4">2km </option>
-    <option value="5">3km </option>
-</select>
-</form>
-<font size="1">※範囲を指定しない場合は自動で1kmを指定します。</font>
+<div class="center-align">
+  <form name="form1">
+    <label for="ranges" class="ranges-label">検索範囲</label>
+    <select id="ranges" class="ranges-label">
+      <option value="0">---</option>
+      <option value="1">300m</option>
+      <option value="2">500m</option>
+      <option value="3">1km </option>
+      <option value="4">2km </option>
+      <option value="5">3km </option>
+    </select>
+  </form>
+  <font size="1">※範囲を指定しない場合は自動で1kmを指定します。</font>
 
-<form id="location-form" action="/shops" method="GET">
-  <input type="hidden" name="latitude" id="latitude" value="">
-  <input type="hidden" name="longitude" id="longitude" value="">
-  <input type="hidden" name="range" id="range" value="">
-  <button id="search-button" type="button">検索</button>
-</form>
+  <form id="location-form" action="/shops" method="GET">
+    <input type="hidden" name="latitude" id="latitude" value="">
+    <input type="hidden" name="longitude" id="longitude" value="">
+    <input type="hidden" name="range" id="range" value="">
+    <button id="search-button" type="button">検索</button>
+  </form>
+
+  <% if @shops.any? %>
+    <% if @shop_count >= 100 %>
+      <h3>100件以上の飲食店が見つかりました。</h3>
+    <% else %>
+      <h3><%= @shop_count %>件のお店が見つかりました。</h3>
+    <% end %>
+  <% end %>
+</div>
 
 <!-- 現在地を取得するJavaScript -->
 <script>
@@ -43,22 +54,15 @@ document.getElementById('search-button').addEventListener('click', function() {
 });
 </script>
 
-
-<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
-<% if @shops.any? %>
-  <% if @shop_count >= 100 %>
-    <h3>100件以上の飲食店が見つかりました。</h3>
-  <% else %>
-    <h3><%= @shop_count %>件のお店が見つかりました。</h3>
-  <% end %>
-<% end %>
-
 <div id="shop-container">
   <% @shops.each do |shop| %>
     <div class="shop-container">
       <div class="shop-image">
-        <img src="<%= shop["logo_image"] %>" alt="<%= shop["name"] %>">
+      <% if shop["logo_image"] != "https://imgfp.hotp.jp/SYS/cmn/images/common/diary/custom/m30_img_noimage.gif" %>
+        <a href="<%= shop_path(shop["id"]) %>"><img src="<%= shop["logo_image"] %>" alt="<%= shop["name"] %>"></a>
+      <% else %>
+        <a href="<%= shop_path(shop["id"]) %>"><img src="<%= shop["photo"]["pc"]["l"] %>" alt="<%= shop["name"] %>"></a>
+      <% end %>
         <font size="1"></font>
       </div>
       <div class="shop-info">
@@ -73,7 +77,9 @@ document.getElementById('search-button').addEventListener('click', function() {
 </div>
 
 <% if @shops.any? %>
-  <%= paginate @shops, params: { latitude: @latitude, longitude: @longitude, range: @range } %>
+  <div class="center-align">
+    <%= paginate @shops, params: { latitude: @latitude, longitude: @longitude, range: @range } %>
+  </div>
 <% end %>
 
 

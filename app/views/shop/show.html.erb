@@ -2,161 +2,171 @@
 
 <%= link_to "戻る", shops_path %>
 
-<p><%= @shop["large_area"]["name"] %> > <%= @shop["middle_area"]["name"] %> > <%= @shop["small_area"]["name"] %></p>
-<p><%= @shop["genre"]["name"] %> <%= @shop["genre"]["catch"] %></p>
-<h2><%= @shop["name"] %></h2>
-<img src="<%= @shop["logo_image"] %>" alt="logo">
-<img src="<%= @shop["photo"]["pc"]["m"] %>" alt="photo">
+<div class="center-align">
 
-<h4>店舗情報</h4>
-<table class="shopshow">
-  <tr>
-    <td>店舗名</td>
-    <td><%= @shop["name"] %></td>
-  </tr>
-  <tr>
-    <td>店舗名かな</td>
-    <td><%= @shop["name_kana"] %></td>
-  </tr>
-  <tr>
-    <td>URL</td>
-    <td><%= @shop["urls"]["pc"] %></td>
-  </tr>
-  <tr>
-    <td>ジャンル</td>
-    <td><%= @shop["genre"]["name"] %></td>
-  </tr>
-</table>
+  <p><%= @shop["large_area"]["name"] %> > <%= @shop["middle_area"]["name"] %> > <%= @shop["small_area"]["name"] %></p>
+  <p><%= @shop["genre"]["name"] %> <%= @shop["genre"]["catch"] %></p>
+  <table class="center-align">
+    <tr>
+      <% if @shop["logo_image"] != "https://imgfp.hotp.jp/SYS/cmn/images/common/diary/custom/m30_img_noimage.gif" %>
+        <td><img src="<%= @shop["logo_image"] %>" alt="logo"></td>
+      <% end %>
+      <td><h2 class="show_shop-name"><%= @shop["name"] %></h2></td>
+    </tr>
+  </table>
+  
+  <img src="<%= @shop["photo"]["pc"]["l"] %>" alt="photo">
 
+  <h4>店舗情報</h4>
+  <table class="table">
+    <tr>
+      <td>店舗名</td>
+      <td><%= @shop["name"] %></td>
+    </tr>
+    <tr>
+      <td>店舗名かな</td>
+      <td><%= @shop["name_kana"] %></td>
+    </tr>
+    <tr>
+      <td>URL</td>
+      <td><a href= <%@shop["urls"]["pc"] %>><%= @shop["urls"]["pc"] %></a></td>
+    </tr>
+    <tr>
+      <td>ジャンル</td>
+      <td><%= @shop["genre"]["name"] %></td>
+    </tr>
+  </table>
 
-<h4>営業</h4>
-<table class="shopshow">
-  <tr>
-    <td>営業時間</td>
-    <td><%= @shop["open"] %></td>
-  </tr>
-  <tr>
-    <td>定休日</td>
-    <td><%= @shop["close"] %></td>
-  </tr>
-</table>
+  <h4>営業</h4>
+  <table class="table">
+    <tr>
+      <td>営業時間</td>
+      <td><%= @shop["open"] %></td>
+    </tr>
+    <tr>
+      <td>定休日</td>
+      <td><%= @shop["close"] %></td>
+    </tr>
+  </table>
 
-<h4>アクセス</h4>
-<table class="shopshow">
-  <tr>
-    <td>店舗所在地</td>
-    <td><%= @shop["address"] %></td>
-  </tr>
-  <tr>
-    <td>最寄り駅</td>
-    <td><%= @shop["station_name"] %></td>
-  </tr>
-  </tr>
-    <td>アクセス</td>
-    <td><%= @shop["access"] %></td>
-  </tr>
-</table>
+  <h4>アクセス</h4>
+  <table class="table">
+    <tr>
+      <td>店舗所在地</td>
+      <td><%= @shop["address"] %></td>
+    </tr>
+    <tr>
+      <td>最寄り駅</td>
+      <td><%= @shop["station_name"] %></td>
+    </tr>
+    </tr>
+      <td>アクセス</td>
+      <td><%= @shop["access"] %></td>
+    </tr>
+  </table>
 
-<h4>予算</h4>
-<table class="shopshow">
-  <tr>
-  <td>平均ディナー予算</td>
-    <td><%= @shop["budget"]["average"] %></td>
-  </tr>
-  <tr>
-  <td>カード</td>
-  <td><%= @shop["card"]%></td>
-</tr>
-  <tr>
-    <td>料金備考</td>
-    <td><%= @shop["budget_memo"]%></td>
-  </tr> 
-</table>
+  <h4>予算</h4>
+  <table class="table">
+    <tr>
+    <td>平均ディナー予算</td>
+      <td><%= @shop["budget"]["average"] %></td>
+    </tr>
+    <tr>
+      <td>カード</td>
+      <td><%= @shop["card"]%></td>
+    </tr>
+    <tr>
+      <td>料金備考</td>
+      <td><%= @shop["budget_memo"]%></td>
+    </tr> 
+  </table>
 
-<h4>お席</h4>
-<table class="shopshow">
-  <tr>
-    <td>総席数</td>
-    <td><%= @shop["capacity"] %></td>
-  </tr>
-  <tr>
-    <td>最大宴会収容人数</td>
-    <td><%= @shop["party_capacity"] %></td>
-  </tr>
-  <tr>
-    <td>座敷</td>
-    <td><%= @shop["tatami"] %></td>
-  </tr>
-  <tr>
-    <td>掘りごたつ</td>
-    <td><%= @shop["horigotatsu"] %></td>
-  </tr>
-  <tr>
-    <td>貸切</td>
-    <td><%= @shop["charter"] %></td>
-</tr>
-</table>
+  <h4>お席</h4>
+  <table class="table">
+    <tr>
+      <td>総席数</td>
+      <td><%= @shop["capacity"] %></td>
+    </tr>
+    <tr>
+      <td>最大宴会収容人数</td>
+      <td><%= @shop["party_capacity"] %></td>
+    </tr>
+    <tr>
+      <td>座敷</td>
+      <td><%= @shop["tatami"] %></td>
+    </tr>
+    <tr>
+      <td>掘りごたつ</td>
+      <td><%= @shop["horigotatsu"] %></td>
+    </tr>
+    <tr>
+      <td>貸切</td>
+      <td><%= @shop["charter"] %></td>
+    </tr>
+  </table>
 
-<h4>設備</h4>
-<table class="shopshow">
-  <tr>
-    <td>Wi-Fi</td>
-    <td><%= @shop["wifi"] %></td>
-  </tr>
-  <tr>
-    <td>バリアフリー</td>
-    <td><%= @shop["barrier_free"] %></td>
-  </tr>
-  <tr>
-    <td>駐車場</td>
-    <td><%= @shop["parking"] %></td>
-  </tr>
-  <tr>
-    <td>禁煙席</td>
-    <td><%= @shop["non_smoking"] %></td>
-  </tr>
-  <tr>
-    <td>その他設備</td>
-    <td><%= @shop["other_memo"] %></td>
-  </tr>
-</table>
+  <h4>設備</h4>
+  <table class="table">
+    <tr>
+      <td>Wi-Fi</td>
+      <td><%= @shop["wifi"] %></td>
+    </tr>
+    <tr>
+      <td>バリアフリー</td>
+      <td><%= @shop["barrier_free"] %></td>
+    </tr>
+    <tr>
+      <td>駐車場</td>
+      <td><%= @shop["parking"] %></td>
+    </tr>
+    <tr>
+      <td>禁煙席</td>
+      <td><%= @shop["non_smoking"] %></td>
+    </tr>
+    <tr>
+      <td>その他設備</td>
+      <td><%= @shop["other_memo"] %></td>
+    </tr>
+  </table>
 
-<h4>その他</h4>
-<table class="shopshow">
-  <tr>
-    <td>飲み放題</td>
-    <td><%= @shop["free_drink"] %></td>
-  </tr>
-  <tr>
-    <td>食べ放題</td>
-    <td><%= @shop["free_food"] %></td>
-  </tr>
-  <tr>
-    <td>コース料理</td>
-    <td><%= @shop["course"] %></td>
-  </tr>
-  <tr>
-    <td>ランチメニュー</td>
-    <td><%= @shop["lunch"] %></td>
-  </tr>
-  <tr>
-    <td><英語メニュー></td>
-    <td><%= @shop["english"] %></td>
-  </tr>
-  <tr>
-    <td>ペット</td>
-    <td><%= @shop["pet"] %></td>
-  </tr>
-  <tr>
-    <td>お子様連れ</td>
-    <td><%= @shop["child"] %></td>
-  </tr>
-  <tr>
-    <td>23時以降の営業</td>
-    <td><%= @shop["midnight"] %></td>
-  </tr>
-  <tr>
-    <td>クーポン</td>
-    <td><%= @shop["coupon_urls"]["pc"] %></td>
-  </tr>
-</table>
+  <h4>その他</h4>
+  <table class="table">
+    <tr>
+      <td>飲み放題</td>
+      <td><%= @shop["free_drink"] %></td>
+    </tr>
+    <tr>
+      <td>食べ放題</td>
+      <td><%= @shop["free_food"] %></td>
+    </tr>
+    <tr>
+      <td>コース料理</td>
+      <td><%= @shop["course"] %></td>
+    </tr>
+    <tr>
+      <td>ランチメニュー</td>
+      <td><%= @shop["lunch"] %></td>
+    </tr>
+    <tr>
+      <td>英語メニュー</td>
+      <td><%= @shop["english"] %></td>
+    </tr>
+    <tr>
+      <td>ペット</td>
+      <td><%= @shop["pet"] %></td>
+    </tr>
+    <tr>
+      <td>お子様連れ</td>
+      <td><%= @shop["child"] %></td>
+    </tr>
+    <tr>
+      <td>23時以降の営業</td>
+      <td><%= @shop["midnight"] %></td>
+    </tr>
+    <tr>
+      <td>クーポン</td>
+      <td><a href= <%@shop["coupon_urls"]["pc"] %>><%= @shop["coupon_urls"]["pc"] %></a></td>
+    </tr>
+  </table>
+
+</div>

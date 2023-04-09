@@ -13,8 +13,12 @@
  *= require_tree .
  *= require_self
 */
- 
- #shop-container {
+body {
+  background-color: #ffffe0; //これは赤色
+} 
+
+
+#shop-container {
   margin-bottom: 20px;
 }
 
@@ -34,7 +38,7 @@
   width: 250px;
   height: 250px;
   object-fit: cover;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .shop-image p {
@@ -44,8 +48,50 @@
 
 .shop-info {
   flex: 1;
+  font-size: 15px;
+  line-height: 1.4;
 }
 
 .shop-name {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  font-size: 33px;
+}
+
+.center-align {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.table {
+  border: 2px solid #687370;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.table tbody th,
+.table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #687370;/*一括指定せず、border-bottomのみ*/
+}
+
+.table tbody th {
+  background-color: #48b9a8;
+  color: #fff;
+}
+
+.table tbody td {
+  border-left: 1px solid #687370;
+}
+
+.table tbody tr:last-child th,
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.show_shop-name {
+  font-size: 48px;
 }
