@@ -28,12 +28,24 @@ class SearchController < ApplicationController
 
     @latitude = latitude
     @longitude = longitude
-    @range = range
     @current_page = page
+
+    case range
+    when "1"
+      @range = '300m'
+    when "2"
+      @range = '500m'
+    when "3"
+      @range = '1km'
+    when "4"
+      @range = '2km'
+    when "5"
+      @range = '3km'
+    end
 
     # Kaminari ページング
     # 取得した店舗数が1店舗のみの場合は例外的に処理する。
-    # 取得した店舗数が1店舗のみだと単一のオブジェクトとして値が返ってくるため、同様に処理するとエラーが発生する。
+    # 取得した店舗数が1店舗のみだと配列としてではなく単一のオブジェクトとして値が返ってくるため、同様に処理するとエラーが発生する。
     if @shops.size > 0
       if @shops.is_a?(Array)
         if @shops.size <= 10

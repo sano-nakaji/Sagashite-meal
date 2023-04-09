@@ -33,8 +33,10 @@ class HotpepperClient
       lat: latitude,
       lng: longitude,
       range: range,
-      count: 100,
+      count: 100
     }
+
+
     client = HotpepperClient.new(latitude, longitude)
     result = client.search(options)
     if result.nil?

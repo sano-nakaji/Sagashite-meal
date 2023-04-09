@@ -2,10 +2,10 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="center-align">
-  <form name="form1">
+  <form name="range-form">
     <label for="ranges" class="ranges-label">検索範囲</label>
     <select id="ranges" class="ranges-label">
-      <option value="0">---</option>
+      <option value="3">---</option>
       <option value="1">300m</option>
       <option value="2">500m</option>
       <option value="3">1km </option>
@@ -24,9 +24,9 @@
 
   <% if @shops.any? %>
     <% if @shop_count >= 100 %>
-      <h3>100件以上の飲食店が見つかりました。</h3>
+      <h3><%= @range %>以内で、100件以上の飲食店が見つかりました。</h3>
     <% else %>
-      <h3><%= @shop_count %>件のお店が見つかりました。</h3>
+      <h3><%= @range %>以内で、<%= @shop_count %>件のお店が見つかりました。</h3>
     <% end %>
   <% end %>
 </div>
@@ -81,7 +81,6 @@ document.getElementById('search-button').addEventListener('click', function() {
     <%= paginate @shops, params: { latitude: @latitude, longitude: @longitude, range: @range } %>
   </div>
 <% end %>
-
 
 <% if @latitude != 0 %>
   <font size="1">現在地 : <%= @latitude %> . <%= @longitude %></font>
