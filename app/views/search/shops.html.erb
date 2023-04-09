@@ -6,11 +6,12 @@
     <option value="0">---</option>
     <option value="1">300m</option>
     <option value="2">500m</option>
-    <option value="3">1000m </option>
-    <option value="4">2000m </option>
-    <option value="5">3000m </option>
+    <option value="3">1km </option>
+    <option value="4">2km </option>
+    <option value="5">3km </option>
 </select>
 </form>
+<font size="1">※範囲を指定しない場合は自動で1kmを指定します。</font>
 
 <form id="location-form" action="/shops" method="GET">
   <input type="hidden" name="latitude" id="latitude" value="">
@@ -45,8 +46,12 @@ document.getElementById('search-button').addEventListener('click', function() {
 
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<% if @latitude != 0 %>
-  <h3>検索結果</h3>
+<% if @shops.any? %>
+  <% if @shop_count >= 100 %>
+    <h3>100件以上の飲食店が見つかりました。</h3>
+  <% else %>
+    <h3><%= @shop_count %>件のお店が見つかりました。</h3>
+  <% end %>
 <% end %>
 
 <div id="shop-container">
@@ -66,6 +71,11 @@ document.getElementById('search-button').addEventListener('click', function() {
     </div>
   <% end %>
 </div>
+
+<% if @shops.any? %>
+  <%= paginate @shops, params: { latitude: @latitude, longitude: @longitude, range: @range } %>
+<% end %>
+
 
 <% if @latitude != 0 %>
   <font size="1">現在地 : <%= @latitude %> . <%= @longitude %></font>

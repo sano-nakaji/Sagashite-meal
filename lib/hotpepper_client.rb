@@ -12,17 +12,14 @@ class HotpepperClient
   end
 
   def search(options = {})
-    # searchメソッドと同様、必要なパラメーターを設定
     query = {
       lat: options[:lat],
       lng: options[:lng],
       range: options[:range],
+      count: options[:count]
     }
-    # HTTPartyを使用してAPIにリクエストを送信、レスポンスを取得
     response = self.class.get('/gourmet/v1/', query: query)
-
     if response.success?
-      # レスポンスが成功した場合、XML形式のレスポンスをパースしてJSON形式に変換
       xml = Nokogiri::XML(response.body)
       json = Hash.from_xml(xml.to_s).to_json
       return JSON.parse(json)['results']['shop']
@@ -32,21 +29,21 @@ class HotpepperClient
   end
 
   def search_shops(latitude, longitude, range)
-    # 必要なパラメーターを設定
     options = {
       lat: latitude,
       lng: longitude,
       range: range,
+      count: 100,
     }
-    # searchメソッドを使用、APIから店舗情報を取得する
-    result = search(options)
+    client = HotpepperClient.new(latitude, longitude)
+    result = client.search(options)
     if result.nil?
       return []
     else
       return result
     end
   end
-
+  
   def get_shop(shop_id)
     query = { id: shop_id }
     response = self.class.get('/gourmet/v1/', query: query)
@@ -64,5 +61,4 @@ class HotpepperClient
     end
   end
   
-
 end

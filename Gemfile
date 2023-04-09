@@ -79,3 +79,6 @@ gem 'httparty'
 
 #XML-JSON変換ライブラリ
 gem 'nokogiri'
+
+#ページング機能ライブラリ
+gem 'kaminari'
