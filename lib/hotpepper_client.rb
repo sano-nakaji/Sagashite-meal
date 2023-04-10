@@ -16,8 +16,12 @@ class HotpepperClient
       lat: options[:lat],
       lng: options[:lng],
       range: options[:range],
-      count: options[:count]
+      count: options[:count],
+      order: options[:order],
+      genre: options[:genre],
+      budget: options[:budget]
     }
+
     response = self.class.get('/gourmet/v1/', query: query)
     if response.success?
       xml = Nokogiri::XML(response.body)
@@ -28,14 +32,16 @@ class HotpepperClient
     end
   end
 
-  def search_shops(latitude, longitude, range)
+  def search_shops(latitude, longitude, range, order, genre, budget)
     options = {
       lat: latitude,
       lng: longitude,
       range: range,
+      order: order,
+      genre: genre,
+      budget: budget,
       count: 100
     }
-
 
     client = HotpepperClient.new(latitude, longitude)
     result = client.search(options)

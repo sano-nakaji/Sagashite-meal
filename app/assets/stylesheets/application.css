@@ -13,8 +13,13 @@
  *= require_tree .
  *= require_self
 */
+h1 {
+  font-family: cursive, sans-serif;
+  font-size: 40px;
+}
+
 body {
-  background-color: #ffffe0; //これは赤色
+  background-color: #ffffe0;
 } 
 
 
@@ -49,7 +54,7 @@ body {
 .shop-info {
   flex: 1;
   font-size: 15px;
-  line-height: 1.4;
+  line-height: 1.2;
 }
 
 .shop-name {
@@ -60,6 +65,21 @@ body {
 .center-align {
   margin: 0 auto;
   text-align: center;
+}
+
+form {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#search-button {
+	text-align: center;
+	margin: auto;
+  width: 120px;
+	font-weight: bold;
+	border: 2px solid #c180ff;
+	color: #c180ff;
+	border-radius: 100vh;
 }
 
 .table {
@@ -75,7 +95,7 @@ body {
 .table tbody th,
 .table tbody td {
   padding: 12px;
-  border-bottom: 1px solid #687370;/*一括指定せず、border-bottomのみ*/
+  border-bottom: 1px solid #687370;
 }
 
 .table tbody th {
